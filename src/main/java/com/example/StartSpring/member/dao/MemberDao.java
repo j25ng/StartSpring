@@ -15,4 +15,6 @@ public interface MemberDao {
     public int insertUser(MemberBean memberBean);
 
     public int updateUser(MemberBean memberBean);
+
+    public int deleteUser(MemberBean memberBean);
 }

@@ -69,11 +69,7 @@ public class HelloController {
     }
 
     @PostMapping("/deleteUser")
-    private Map<String, Object> deleteUser() {
-        Map<String, Object> data = new HashMap<>();
-        data.put("result", "fail");
-        data.put("resultMsg", "process failed");
-
-        return data;
+    private Map<String, Object> deleteUser(MemberBean bean) {
+        return memberService.deleteUser(bean);
     }
 }

@@ -64,4 +64,34 @@ public class MemberService {
 
         return data;
     }
+
+    public Map<String, Object> deleteUser(MemberBean bean) {
+        Map<String, Object> data = new HashMap<>();
+        int row;
+        System.out.println(bean);
+
+        if (StringUtils.isEmpty(bean.getId())) {
+            data.put("result", "fail");
+            data.put("resultMsg", "id is null");
+            return data;
+        }
+
+        try {
+            row = memberDao.deleteUser(bean);
+
+            if (row > 0) {
+                data.put("result", "ok");
+                data.put("resultMsg", "user delete successes");
+            } else {
+                data.put("result", "fail");
+                data.put("resultMsg", "user not found or already deleted");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            data.put("result", "fail");
+            data.put("resultMsg", "user delete failed : " + e.getMessage());
+        }
+
+        return data;
+    }
 }

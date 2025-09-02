@@ -46,4 +46,10 @@
         </if>
         WHERE id = #{id}
     </update>
+
+    <delete id="deleteUser" parameterType="com.example.StartSpring.member.bean.MemberBean">
+        DELETE
+        FROM users
+        WHERE id = ${id}
+    </delete>
 </mapper>
