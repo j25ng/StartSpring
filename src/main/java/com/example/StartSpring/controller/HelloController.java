@@ -1,0 +1,75 @@
+package com.example.StartSpring.controller;
+
+import com.example.StartSpring.member.bean.MemberBean;
+import com.example.StartSpring.member.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+public class HelloController {
+    @Autowired
+    private MemberService memberService;
+
+    @GetMapping("/getUsers")
+    private Map<String, Object> getUsers() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("result", "fail");
+        data.put("resultMsg", "process failed");
+
+        try {
+            List<MemberBean> list = memberService.getUserList();
+            data.put("memberList", list);
+            data.put("result", "ok");
+            data.put("resultMsg", "process successes");
+        } catch (Exception e) {
+            e.printStackTrace();
+            data.put("resultMsg", "process failed : " + e.getMessage());
+        }
+
+        return data;
+    }
+
+    @PostMapping("/addUser")
+    private Map<String, Object> addUser(MemberBean bean) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("result", "fail");
+        data.put("resultMsg", "user insert failed");
+
+        try {
+            boolean res = memberService.insertUser(bean);
+            if (res) {
+                data.put("result", "ok");
+                data.put("resultMsg", "user insert successes");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            data.put("resultMsg", "user insert failed : " + e.getMessage());
+        }
+
+        return data;
+    }
+
+    @PostMapping("/updateUser")
+    private Map<String, Object> updateUser() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("result", "fail");
+        data.put("resultMsg", "process failed");
+
+        return data;
+    }
+
+    @PostMapping("/deleteUser")
+    private Map<String, Object> deleteUser() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("result", "fail");
+        data.put("resultMsg", "process failed");
+
+        return data;
+    }
+}

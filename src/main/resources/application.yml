@@ -1,0 +1,23 @@
+spring.application.name: StartSpring
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mvdb?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-alias-package: com.example.StartSpring
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: 'NULL'
+
+# Server port
+server:
+  port: 8081

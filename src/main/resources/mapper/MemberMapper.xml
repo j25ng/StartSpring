@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Dao 클래스가 있는 전체 경로를 써주면 됨-->
+<mapper namespace="com.example.StartSpring.member.dao.MemberDao">
+    <!-- id는 dao에 있는 method명과 mapping-->
+    <select id="selectMemberList"
+            parameterType="com.example.StartSpring.member.bean.MemberBean"
+            resultType="com.example.StartSpring.member.bean.MemberBean">
+        SELECT
+        id
+        ,name as username
+        ,password
+        ,email
+        FROM users
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="insertUser" parameterType="com.example.StartSpring.member.bean.MemberBean">
+        INSERT INTO users
+        (
+        name
+        ,password
+        ,email
+        )
+        VALUES
+        (
+        #{username}
+        ,#{password}
+        ,#{email}
+        )
+    </insert>
+</mapper>
