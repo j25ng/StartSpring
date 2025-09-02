@@ -31,4 +31,15 @@
         ,#{email}
         )
     </insert>
+
+    <update id="updateUser" parameterType="com.example.StartSpring.member.bean.MemberBean">
+        UPDATE users
+        SET
+        name = #{username}
+        ,password = #{password}
+        <if test="email != '' and email != null">
+            ,email = #{email}
+        </if>
+        WHERE id = #{id}
+    </update>
 </mapper>

@@ -56,12 +56,8 @@ public class HelloController {
     }
 
     @PostMapping("/updateUser")
-    private Map<String, Object> updateUser() {
-        Map<String, Object> data = new HashMap<>();
-        data.put("result", "fail");
-        data.put("resultMsg", "process failed");
-
-        return data;
+    private Map<String, Object> updateUser(MemberBean bean) {
+        return memberService.updateUser(bean);
     }
 
     @PostMapping("/deleteUser")
