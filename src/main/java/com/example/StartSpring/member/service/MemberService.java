@@ -17,8 +17,8 @@ public class MemberService {
     @Autowired
     private MemberDao memberDao;
 
-    public List<MemberBean> getUserList() {
-        return memberDao.selectMemberList(null);
+    public List<MemberBean> getUserList(MemberBean bean) {
+        return memberDao.selectMemberList(bean);
     }
 
     // @return true: 회원가입 성공, false: 회원가입 실패

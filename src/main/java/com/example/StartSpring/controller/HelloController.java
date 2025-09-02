@@ -17,19 +17,27 @@ public class HelloController {
     private MemberService memberService;
 
     @GetMapping("/getUsers")
-    private Map<String, Object> getUsers() {
+    private Map<String, Object> getUsers(MemberBean bean) {
         Map<String, Object> data = new HashMap<>();
         data.put("result", "fail");
         data.put("resultMsg", "process failed");
 
         try {
-            List<MemberBean> list = memberService.getUserList();
-            data.put("memberList", list);
-            data.put("result", "ok");
-            data.put("resultMsg", "process successes");
+            Integer.parseInt(bean.getPage());
+            try {
+                List<MemberBean> list = memberService.getUserList(bean);
+                data.put("memberList", list);
+                data.put("result", "ok");
+                data.put("resultMsg", "process successes");
+            } catch (Exception e) {
+                e.printStackTrace();
+                data.put("resultMsg", "process failed : " + e.getMessage());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            data.put("resultMsg", "process failed : " + e.getMessage());
+            data.put("resultMsg", "page is not INTEGER");
+            return data;
         }
 
         return data;
