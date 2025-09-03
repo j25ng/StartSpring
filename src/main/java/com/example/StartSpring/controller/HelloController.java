@@ -1,5 +1,7 @@
 package com.example.StartSpring.controller;
 
+import com.example.StartSpring.board.bean.BoardBean;
+import com.example.StartSpring.board.service.BoardService;
 import com.example.StartSpring.member.bean.MemberBean;
 import com.example.StartSpring.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import java.util.Map;
 public class HelloController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private BoardService boardService;
 
     @GetMapping("/getUsers")
     private Map<String, Object> getUsers(MemberBean bean) {
@@ -72,4 +77,10 @@ public class HelloController {
     private Map<String, Object> deleteUser(MemberBean bean) {
         return memberService.deleteUser(bean);
     }
+
+    @PostMapping("/board/writeBoard")
+    public Map<String, Object> writeBoard(BoardBean bean) {
+        return boardService.insertBoard(bean);
+    }
+
 }

@@ -3,7 +3,6 @@ package com.example.StartSpring.member.dao;
 import com.example.StartSpring.member.bean.MemberBean;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 // MemberMapper.xml 에서 매핑, 여기서는 interface로 껍데기만 생성

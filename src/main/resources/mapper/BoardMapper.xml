@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Dao 클래스가 있는 전체 경로를 써주면 됨-->
+<mapper namespace="com.example.StartSpring.board.dao.BoardDao">
+    <insert id="insertBoard" parameterType="com.example.StartSpring.board.bean.BoardBean">
+        INSERT INTO board
+        (
+        board_title
+        ,content
+        ,user_id
+        )
+        VALUES
+        (
+        #{title}
+        ,#{content}
+        ,#{writer}
+        )
+    </insert>
+</mapper>
