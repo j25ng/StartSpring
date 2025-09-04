@@ -1,6 +1,5 @@
 package com.example.StartSpring.controller;
 
-import com.example.StartSpring.board.bean.BoardBean;
 import com.example.StartSpring.board.service.BoardService;
 import com.example.StartSpring.member.bean.MemberBean;
 import com.example.StartSpring.member.service.MemberService;
@@ -77,10 +76,4 @@ public class HelloController {
     private Map<String, Object> deleteUser(MemberBean bean) {
         return memberService.deleteUser(bean);
     }
-
-    @PostMapping("/board/writeBoard")
-    public Map<String, Object> writeBoard(BoardBean bean) {
-        return boardService.insertBoard(bean);
-    }
-
 }
