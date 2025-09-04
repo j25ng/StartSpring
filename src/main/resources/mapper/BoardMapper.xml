@@ -4,7 +4,7 @@
 
 <!--Dao 클래스가 있는 전체 경로를 써주면 됨-->
 <mapper namespace="com.example.StartSpring.board.dao.BoardDao">
-    <insert id="insertBoard" parameterType="com.example.StartSpring.board.bean.BoardBean">
+    <insert id="insertBoard" parameterType="com.example.StartSpring.board.bean.BoardBean" useGeneratedKeys="true" keyProperty="no">
         INSERT INTO board
         (
         board_title

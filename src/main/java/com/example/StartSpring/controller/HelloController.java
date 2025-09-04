@@ -3,6 +3,8 @@ package com.example.StartSpring.controller;
 import com.example.StartSpring.board.service.BoardService;
 import com.example.StartSpring.member.bean.MemberBean;
 import com.example.StartSpring.member.service.MemberService;
+import com.example.StartSpring.utils.JwtUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +60,9 @@ public class HelloController {
             if (res) {
                 data.put("result", "ok");
                 data.put("resultMsg", "user insert successes");
+
+                String authToken = JwtUtil.createToken(bean.getId(), bean.getPassword());
+                data.put("authToken", authToken);
             }
         } catch (Exception e) {
             e.printStackTrace();
