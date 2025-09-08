@@ -25,8 +25,20 @@
         </if>
     </select>
 
+    <select id="selectLoginMember" parameterType="com.example.StartSpring.member.bean.MemberBean" resultType="com.example.StartSpring.member.bean.MemberBean">
+        SELECT
+        id
+        ,name as username
+        ,password
+        ,email
+        FROM users
+        WHERE
+            email = #{email}
+            AND password = #{password}
+    </select>
+
     <!-- 회원가입 -->
-    <insert id="insertUser" parameterType="com.example.StartSpring.member.bean.MemberBean">
+    <insert id="insertUser" parameterType="com.example.StartSpring.member.bean.MemberBean" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users
         (
         name

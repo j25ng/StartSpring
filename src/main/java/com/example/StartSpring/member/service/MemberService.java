@@ -20,6 +20,10 @@ public class MemberService {
         return memberDao.selectMemberList(bean);
     }
 
+    public MemberBean selectLoginMember(MemberBean bean) {
+        return memberDao.selectLoginMember(bean);
+    }
+
     // @return true: 회원가입 성공, false: 회원가입 실패
     public boolean insertUser(MemberBean bean) {
         int row = memberDao.insertUser(bean);

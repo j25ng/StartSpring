@@ -18,4 +18,14 @@
         ,#{writer}
         )
     </insert>
+
+    <update id="updateBoard" parameterType="com.example.StartSpring.board.bean.BoardBean">
+        UPDATE board
+        SET
+        board_title = #{title}
+        ,content = #{content}
+        WHERE 
+        board_no = #{no}
+        AND user_id= #{writer}
+    </update>
 </mapper>

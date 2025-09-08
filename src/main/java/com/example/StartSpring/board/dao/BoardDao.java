@@ -6,5 +6,7 @@ import com.example.StartSpring.board.bean.BoardBean;
 
 @Mapper
 public interface BoardDao {
-    public int insertBoard(BoardBean boardBean);
+    public int insertBoard(BoardBean bean);
+
+    public int updateBoard(BoardBean bean);
 }

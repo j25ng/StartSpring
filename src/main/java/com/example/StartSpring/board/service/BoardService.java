@@ -15,22 +15,22 @@ public class BoardService {
     @Autowired
     private BoardDao boardDao;
 
-    public Map<String, Object> insertBoard(BoardBean boardBean) {
+    public Map<String, Object> insertBoard(BoardBean bean) {
         Map<String, Object> data = new HashMap<>();
 
-        if (!StringUtils.hasText(boardBean.getTitle()) ||
-                !StringUtils.hasText(boardBean.getContent()) ||
-                !StringUtils.hasText(boardBean.getWriter())) {
+        if (!StringUtils.hasText(bean.getTitle()) ||
+                !StringUtils.hasText(bean.getContent()) ||
+                !StringUtils.hasText(bean.getWriter())) {
             data.put("result", "false");
             data.put("resultMsg", "필수 항목이 누락되었습니다.");
             return data;
         }
 
         try {
-            int row = boardDao.insertBoard(boardBean);
+            int row = boardDao.insertBoard(bean);
 
             if (row > 0) {
-                data.put("result", "true");
+                data.put("result", "ok");
                 data.put("resultMsg", "게시글이 등록되었습니다.");
             } else {
                 data.put("result", "false");
@@ -51,5 +51,30 @@ public class BoardService {
         }
 
         return data;
+    }
+
+    public Map<String, Object> updateBoard(BoardBean bean) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("result", "fail");
+        data.put("resultMsg", "update failed");
+
+        try {
+            int row = boardDao.updateBoard(bean);
+
+            if (row > 0) {
+                data.put("result", "ok");
+                data.put("resultMsg", "update success");
+            } else {
+                data.put("result", "fail");
+                data.put("resultMsg", "your not authorized");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            data.put("result", "fail");
+            data.put("resultMsg", "update failed: " + e.getMessage());
+        }
+
+        return data;
+
     }
 }

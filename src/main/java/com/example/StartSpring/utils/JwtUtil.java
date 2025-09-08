@@ -20,13 +20,13 @@ public class JwtUtil {
     private static final long EXPIRATION_TIME = 1000 * 60 * 60;
 
     // ✅ JWT 토큰 생성
-    public static String createToken(String userId, String password) {
+    public static String createToken(String email, String password) {
         return Jwts.builder()
                 .setSubject("accessToken")
                 .setIssuer("sjw-app") // 발급자
                 .setIssuedAt(new Date()) // 발급 시간
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) // 만료 시간
-                .claim("userId", userId) // 커스텀 클레임
+                .claim("email", email) // 커스텀 클레임
                 .claim("password", password) // 커스텀 클레임
                 .signWith(secretKey) // 서명
                 .compact(); // 최종 문자열 생성
@@ -42,17 +42,17 @@ public class JwtUtil {
 
     // ✅ 사용 예시
     public static void main(String[] args) {
-        String userId = "user123";
+        String email = "user123@example.com";
 
         // 1. 토큰 생성
-        String jwt = createToken(userId, "password123");
+        String jwt = createToken(email, "password123");
         System.out.println("생성된 JWT: " + jwt);
 
         // 2. 토큰 검증
         try {
             Jws<Claims> claims = verifyToken(jwt);
             System.out.println("토큰 유효 ✔");
-            System.out.println("userId: " + claims.getBody().get("userId"));
+            System.out.println("email: " + claims.getBody().get("email"));
             System.out.println("발급자: " + claims.getBody().getIssuer());
         } catch (JwtException e) {
             System.out.println("토큰 유효하지 않음 ❌");

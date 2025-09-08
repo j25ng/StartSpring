@@ -1,6 +1,5 @@
 package com.example.StartSpring.controller;
 
-import com.example.StartSpring.board.service.BoardService;
 import com.example.StartSpring.member.bean.MemberBean;
 import com.example.StartSpring.member.service.MemberService;
 import com.example.StartSpring.utils.JwtUtil;
@@ -13,14 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class HelloController {
     @Autowired
     private MemberService memberService;
-
-    @Autowired
-    private BoardService boardService;
 
     @GetMapping("/getUsers")
     private Map<String, Object> getUsers(MemberBean bean) {
@@ -49,6 +46,31 @@ public class HelloController {
         return data;
     }
 
+    @GetMapping("/selectUser")
+    public Map<String, Object> selectUser(@RequestParam String email, @RequestParam String password) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("result", "fail");
+        data.put("resultMsg", "login failed");
+
+        try {
+            MemberBean member = new MemberBean();
+            member.setEmail(email);
+            member.setPassword(password);
+
+            MemberBean loginMember = memberService.selectLoginMember(member);
+            if (loginMember != null) {
+                data.put("result", "ok");
+                data.put("resultMsg", "login successes");
+                data.put("member", loginMember);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            data.put("resultMsg", "login failed : " + e.getMessage());
+        }
+
+        return data;
+    }
+
     @PostMapping("/addUser")
     private Map<String, Object> addUser(MemberBean bean) {
         Map<String, Object> data = new HashMap<>();
@@ -61,7 +83,7 @@ public class HelloController {
                 data.put("result", "ok");
                 data.put("resultMsg", "user insert successes");
 
-                String authToken = JwtUtil.createToken(bean.getId(), bean.getPassword());
+                String authToken = JwtUtil.createToken(bean.getEmail(), bean.getPassword());
                 data.put("authToken", authToken);
             }
         } catch (Exception e) {

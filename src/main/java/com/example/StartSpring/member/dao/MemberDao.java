@@ -10,6 +10,8 @@ import java.util.List;
 public interface MemberDao {
     public List<MemberBean> selectMemberList(MemberBean memberBean);
 
+    public MemberBean selectLoginMember(MemberBean memberBean);
+
     // insert는 성공(1), 실패(0) 값이 리턴되기 떄문에 return type int
     public int insertUser(MemberBean memberBean);
 
